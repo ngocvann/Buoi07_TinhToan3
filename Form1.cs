@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace Buoi07_TinhToan3
 {
@@ -38,8 +39,8 @@ namespace Buoi07_TinhToan3
             double so1, so2, kq = 0;
 
             // Check input data
-            bool isNumber1 = double.TryParse(txtSo1.Text, out so1);
-            bool isNumber2 = double.TryParse(txtSo2.text, out so2);
+            bool isNumber1 = double.TryParse(txtSo1.Text, NumberStyles.AllowLeadingSign | NumberStyles.AllowParentheses | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out so1);
+            bool isNumber2 = double.TryParse(txtSo2.Text, NumberStyles.AllowLeadingSign | NumberStyles.AllowParentheses | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out so2);
 
             if(!isNumber1 || !isNumber2){
                 MessageBox.Show("Giá trị nhập vào không hợp lệ", "Lỗi nhập dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
