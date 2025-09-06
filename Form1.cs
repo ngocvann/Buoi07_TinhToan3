@@ -36,8 +36,16 @@ namespace Buoi07_TinhToan3
         {
             //lấy giá trị của 2 ô số
             double so1, so2, kq = 0;
-            so1 = double.Parse(txtSo1.Text);
-            so2 = double.Parse(txtSo2.Text);
+
+            // Check input data
+            bool isNumber1 = double.TryParse(txtSo1.Text, out so1);
+            bool isNumber2 = double.TryParse(txtSo2.text, out so2);
+
+            if(!isNumber1 || !isNumber2){
+                MessageBox.Show("Giá trị nhập vào không hợp lệ", "Lỗi nhập dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
             //Thực hiện phép tính dựa vào phép toán được chọn
             if (radCong.Checked) kq = so1 + so2;
             else if (radTru.Checked) kq = so1 - so2;
