@@ -16,6 +16,12 @@ namespace Buoi07_TinhToan3
         public Form1()
         {
             InitializeComponent();
+            txtSo1.Enter += TextBox_SelectAll;
+            txtSo2.Enter += TextBox_SelectAll;
+            txtSo1.GotFocus += TextBox_SelectAll;
+            txtSo2.GotFocus += TextBox_SelectAll;
+            txtSo1.MouseUp += TextBox_KeepSelectAll;
+            txtSo2.MouseUp += TextBox_KeepSelectAll;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,6 +37,18 @@ namespace Buoi07_TinhToan3
                                  "Thông báo", MessageBoxButtons.YesNo);
             if (dr == DialogResult.Yes)
                 this.Close();
+        }
+
+        private void TextBox_SelectAll(object sender, EventArgs e)
+        {
+            var tb = sender as TextBox;
+            BeginInvoke((Action)(() => tb.SelectAll()));
+        }
+
+        private void TextBox_KeepSelectAll(object sender, MouseEventArgs e)
+        {
+            var tb = sender as TextBox;
+            if (tb.SelectionLength == 0) tb.SelectAll();
         }
 
         private void btnTinh_Click(object sender, EventArgs e)
