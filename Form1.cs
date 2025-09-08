@@ -53,6 +53,17 @@ namespace Buoi07_TinhToan3
 
         private void btnTinh_Click(object sender, EventArgs e)
         {
+            string strSo1 = txtSo1.Text.Trim();
+            string strSo2 = txtSo2.Text.Trim();
+
+            if (strSo1.Replace("-", "").Replace(".", "").Length > 30 ||
+        strSo2.Replace("-", "").Replace(".", "").Length > 30)
+            {
+                MessageBox.Show("Giá trị nhập vào lớn hơn 30 chữ số. Vui lòng nhập lại",
+                                "Lỗi nhập dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             //lấy giá trị của 2 ô số
             double so1, so2, kq = 0;
 
@@ -69,7 +80,18 @@ namespace Buoi07_TinhToan3
             if (radCong.Checked) kq = so1 + so2;
             else if (radTru.Checked) kq = so1 - so2;
             else if (radNhan.Checked) kq = so1 * so2;
-            else if (radChia.Checked && so2 != 0) kq = so1 / so2;
+            else if (radChia.Checked)
+            {
+                if (so2 == 0)
+                {
+                    MessageBox.Show("Số bị chia của phép chia phải khác 0", "Lỗi phép tính", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    kq = so1 / so2;
+                }
+            }
             //Hiển thị kết quả lên trên ô kết quả
             txtKq.Text = kq.ToString();
         }
